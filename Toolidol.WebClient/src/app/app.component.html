@@ -1,0 +1,14 @@
+<!-- Toolbar with navigation -->
+<app-toolbar [navigationMenuItems]="navigationMenuItemsSignal()"
+             [toolbarActionItems]="toolbarActionItemsSignal()"
+             (navigationChange)="onNavigationChange($event)"
+             (toolbarActionClick)="onToolbarActionClick($event)"
+             (goBack)="onGoBack()"
+             (goHome)="onGoHome()">
+</app-toolbar>
+
+<!-- Layout with router outlet for dynamic content -->
+<app-layout>
+  <!-- Router outlet will display the routed components here -->
+  <router-outlet></router-outlet>
+</app-layout>
