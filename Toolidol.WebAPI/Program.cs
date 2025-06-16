@@ -68,6 +68,8 @@ namespace Toolidol.WebAPI
                     sqlServerOptions.MigrationsAssembly(Assembly.GetAssembly(typeof(ToolidolDbContext))?.FullName);
                 });
             });
+
+            services.AddHttpClient();
             services.AddSingleton<HttpService>();
             services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
 

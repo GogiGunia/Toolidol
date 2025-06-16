@@ -8,12 +8,14 @@ namespace Toolidol.WebAPI.Services
     public class HttpService
     {
         private readonly ILogger _logger;
-        private readonly HttpClient _httpClient;
-        public HttpService(ILogger<HttpService> logger, HttpClient httpClient)
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public HttpService(ILogger<HttpService> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
+
         public async Task<HttpResponseMessage> SendRequestAsync(string httpMethod, string url, Dictionary<string, string>? headers, Dictionary<string, string>? queryParams, object? content, CancellationToken cancellationToken = default)
         {
             HttpContent? contentObj = content == null ? null : content switch
@@ -24,14 +26,14 @@ namespace Toolidol.WebAPI.Services
                 object => JsonContent.Create(content),
                 _ => throw new NotImplementedException("Unsupported content-type")
             };
-
             return await this.SendRequestAsync(httpMethod, url, headers, queryParams, contentObj, cancellationToken);
         }
 
         private async Task<HttpResponseMessage> SendRequestAsync(string httpMethod, string url, Dictionary<string, string>? headers, Dictionary<string, string>? queryParams, HttpContent? content, CancellationToken cancellationToken = default)
         {
-            UriBuilder uriBuilder = new(url);
+            using var httpClient = _httpClientFactory.CreateClient();
 
+            UriBuilder uriBuilder = new(url);
             if (queryParams != null)
             {
                 var query = HttpUtility.ParseQueryString(uriBuilder.Query);
@@ -41,18 +43,16 @@ namespace Toolidol.WebAPI.Services
             }
 
             HttpRequestMessage request = new(new HttpMethod(httpMethod), uriBuilder.Uri);
-
             if (content != null)
                 request.Content = content;
 
-            request.Headers.Add("Toolidol-App", "Verifications"); //TODO anpassen basiert auf der anforderungn von jeder Schnitstelle separat
+            request.Headers.Add("Toolidol-App", "Verifications");
             if (headers != null)
                 foreach (var keyValue in headers)
                     request.Headers.Add(keyValue.Key, keyValue.Value);
 
             _logger.LogDebug("{httpMethod} {url}\n{request}", httpMethod, url, request.ToString());
-
-            return await _httpClient.SendAsync(request, cancellationToken);
+            return await httpClient.SendAsync(request, cancellationToken);
         }
     }
 }
