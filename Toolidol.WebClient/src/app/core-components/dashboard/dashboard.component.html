@@ -16,22 +16,6 @@
       <div class="dashboard-actions">
         <h3>Quick Actions</h3>
         <div class="action-grid">
-          <button mat-raised-button color="primary" (click)="navigateTo('/realestate')">
-            <mat-icon>home_work</mat-icon>
-            Browse Real Estate
-          </button>
-
-          <button mat-raised-button color="primary" (click)="navigateTo('/autos')">
-            <mat-icon>directions_car</mat-icon>
-            Browse Autos
-          </button>
-
-          <button *ngIf="userService.hasAnyRole(['BusinessUser', 'Admin'])"
-                  mat-raised-button color="accent" (click)="navigateTo('/my-listings')">
-            <mat-icon>list_alt</mat-icon>
-            My Listings
-          </button>
-
           <button *ngIf="userService.isAdmin()"
                   mat-raised-button color="warn" (click)="navigateTo('/admin')">
             <mat-icon>admin_panel_settings</mat-icon>

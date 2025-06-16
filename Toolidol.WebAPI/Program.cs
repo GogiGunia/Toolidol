@@ -237,23 +237,23 @@ namespace Toolidol.WebAPI
 
         private static async Task ExecuteStartupTasksAsync(IServiceProvider services, ILogger logger)
         {
-            //try
-            //{
-            //    using var scope = services.CreateScope();
+            try
+            {
+                using var scope = services.CreateScope();
 
-            //    var dbContext = scope.ServiceProvider.GetRequiredService<ToolidolDbContext>();
-            //    var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
-            //    if (pendingMigrations.Any())
-            //        throw new Exception($"Missing DB-Migrations:\n{string.Join(Environment.NewLine, pendingMigrations)}");
+                var dbContext = scope.ServiceProvider.GetRequiredService<ToolidolDbContext>();
+                var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+                if (pendingMigrations.Any())
+                    throw new Exception($"Missing DB-Migrations:\n{string.Join(Environment.NewLine, pendingMigrations)}");
 
-            //    var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
-            //    await userService.CreateInitialUserAsync();
-            //}
-            //catch (Exception ex)
-            //{
-            //    logger.LogCritical("{ex}", ex.Message);
-            //    throw;
-            //}
+                var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
+                await userService.CreateInitialUserAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogCritical("{ex}", ex.Message);
+                throw;
+            }
         }
     }
 }

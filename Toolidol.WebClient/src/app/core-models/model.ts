@@ -115,16 +115,16 @@ export class NavigationItemFactory {
     };
   }
 
-  static createBusinessNavigationItem(isActive: boolean = false): NavigationItem {
-    return {
-      id: 'my-listings',
-      name: 'My Listings',
-      component: 'MyListingsComponent',
-      isActive,
-      showInNavigation: true,
-      icon: 'list_alt'
-    };
-  }
+  //static createBusinessNavigationItem(isActive: boolean = false): NavigationItem {
+  //  return {
+  //    id: 'my-listings',
+  //    name: 'My Listings',
+  //    component: 'MyListingsComponent',
+  //    isActive,
+  //    showInNavigation: true,
+  //    icon: 'list_alt'
+  //  };
+  //}
 
   static createDashboardItem(isActive: boolean = false): NavigationItem {
     return {
@@ -138,47 +138,47 @@ export class NavigationItemFactory {
   }
 
   // Asset category items (your existing categories)
-  static createRealEstateItem(isActive: boolean = false): NavigationItem {
-    return {
-      id: 'realestate',
-      name: 'Real Estate',
-      component: 'RealestateComponent',
-      isActive,
-      showInNavigation: true,
-      icon: 'real_estate_agent'
-    };
-  }
+  //static createRealEstateItem(isActive: boolean = false): NavigationItem {
+  //  return {
+  //    id: 'realestate',
+  //    name: 'Real Estate',
+  //    component: 'RealestateComponent',
+  //    isActive,
+  //    showInNavigation: true,
+  //    icon: 'real_estate_agent'
+  //  };
+  //}
 
-  static createAutosItem(isActive: boolean = false): NavigationItem {
-    return {
-      id: 'autos',
-      name: 'Autos',
-      component: 'AutosComponent',
-      isActive,
-      showInNavigation: true,
-      icon: 'directions_car'
-    };
-  }
+  //static createAutosItem(isActive: boolean = false): NavigationItem {
+  //  return {
+  //    id: 'autos',
+  //    name: 'Autos',
+  //    component: 'AutosComponent',
+  //    isActive,
+  //    showInNavigation: true,
+  //    icon: 'directions_car'
+  //  };
+  //}
 
-  static createJobsItem(isActive: boolean = false): NavigationItem {
-    return {
-      id: 'jobs',
-      name: 'Jobs',
-      component: 'JobsComponent',
-      isActive,
-      showInNavigation: true,
-      icon: 'work'
-    };
-  }
+  //static createJobsItem(isActive: boolean = false): NavigationItem {
+  //  return {
+  //    id: 'jobs',
+  //    name: 'Jobs',
+  //    component: 'JobsComponent',
+  //    isActive,
+  //    showInNavigation: true,
+  //    icon: 'work'
+  //  };
+  //}
 
-  static createYachtsItem(isActive: boolean = false): NavigationItem {
-    return {
-      id: 'yachts',
-      name: 'Yachts',
-      component: 'YachtsComponent',
-      isActive,
-      showInNavigation: true,
-      icon: 'sailing'
-    };
-  }
+  //static createYachtsItem(isActive: boolean = false): NavigationItem {
+  //  return {
+  //    id: 'yachts',
+  //    name: 'Yachts',
+  //    component: 'YachtsComponent',
+  //    isActive,
+  //    showInNavigation: true,
+  //    icon: 'sailing'
+  //  };
+  //}
 }

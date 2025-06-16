@@ -126,16 +126,16 @@ export class NavigationService {
       });
 
       // Role-based navigation items
-      if (this.userService.hasAnyRole(['BusinessUser', 'Admin'])) {
-        items.push({
-          id: 'my-listings',
-          name: 'My Listings',
-          component: 'MyListingsComponent',
-          isActive: activeRoute === 'my-listings', // Set active based on current route
-          showInNavigation: true,
-          icon: 'list_alt'
-        });
-      }
+      //if (this.userService.hasAnyRole(['BusinessUser', 'Admin'])) {
+      //  items.push({
+      //    id: 'my-listings',
+      //    name: 'My Listings',
+      //    component: 'MyListingsComponent',
+      //    isActive: activeRoute === 'my-listings', // Set active based on current route
+      //    showInNavigation: true,
+      //    icon: 'list_alt'
+      //  });
+      //}
 
       if (this.userService.isAdmin()) {
         items.push({

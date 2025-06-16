@@ -124,7 +124,7 @@ namespace Toolidol.WebAPI.Services
                     LastName = "Admin",
                     Role = UserRole.Admin
                 };
-                string initialPassword = "SuperSecureP@ssw0rd1!"; // TODO: Move to configuration
+                string initialPassword = "AbC123!?#"; // TODO: Move to configuration
                 await CreateUserAsync(initialUserModel, initialPassword, cancellationToken);
                 _logger.LogInformation("Created initial admin user with email {Email}", initialUserModel.Email);
             }
