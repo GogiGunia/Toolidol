@@ -18,6 +18,7 @@ namespace Toolidol.Model.Model
         public DateTime? PasswordResetTokenExpiry { get; set; }
         public UserRole Role { get; set; }
         public DateTime CreatedAt { get; set; }
+        public ICollection<FacebookPage> FacebookPages { get; set; } = new List<FacebookPage>();
 
     }
     public enum UserRole

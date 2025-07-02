@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Toolidol.Model;
 
@@ -11,9 +12,11 @@ using Toolidol.Model;
 namespace Toolidol.Model.Migrations
 {
     [DbContext(typeof(ToolidolDbContext))]
-    partial class ToolidolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250702071251_AddedFacebookPageModel")]
+    partial class AddedFacebookPageModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

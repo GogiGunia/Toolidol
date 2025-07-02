@@ -20,6 +20,7 @@ using Toolidol.WebAPI.Middleware;
 using Toolidol.WebAPI.Middleware.ExceptionHandling;
 using Toolidol.WebAPI.Middleware.Handlers;
 using Toolidol.WebAPI.Middleware.Requirements;
+using Toolidol.WebAPI.Models;
 using Toolidol.WebAPI.Security;
 using Toolidol.WebAPI.Services;
 
@@ -72,12 +73,19 @@ namespace Toolidol.WebAPI
             services.AddHttpClient();
             services.AddSingleton<HttpService>();
             services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddSingleton<IDataProtectionService, DataProtectionService>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IFacebookService, FacebookService>();
+            services.AddScoped<IFacebookPageService, FacebookPageService>();
+
 
             services.AddDataProtection()
                     .PersistKeysToDbContext<ToolidolDbContext>();
+
+            services.Configure<FacebookSettings>(configuration.GetSection("FacebookSettings"));
+
 
             // Configure HTTPS Redirection
             //services.AddHttpsRedirection(options =>
