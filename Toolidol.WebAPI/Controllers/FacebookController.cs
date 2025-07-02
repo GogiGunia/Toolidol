@@ -59,5 +59,59 @@ namespace Toolidol.WebAPI.Controllers
                 return StatusCode(500, new { message = "An internal error occurred while connecting to Facebook." });
             }
         }
+
+        /// <summary>
+        /// Gets the current Facebook connection status for the authenticated user.
+        /// </summary>
+        /// <returns>Connection status and connected pages information.</returns>
+        [HttpGet("status")]
+        [Authorize(Policy = Policy.GENERAL_ACCESS)]
+        public async Task<IActionResult> GetConnectionStatus()
+        {
+            try
+            {
+                var currentUser = await _userService.GetUserAsync(HttpContext);
+                var connectedPages = await _facebookPageService.GetUserPagesAsync(currentUser.Id);
+
+                var isConnected = connectedPages.Any();
+                var pagesData = connectedPages.Select(p => new { p.FacebookPageId, p.Name });
+
+                return Ok(new
+                {
+                    isConnected = isConnected,
+                    pages = pagesData,
+                    pageCount = connectedPages.Count
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while getting Facebook connection status for user");
+                return StatusCode(500, new { message = "An internal error occurred while checking connection status." });
+            }
+        }
+
+        /// <summary>
+        /// Disconnects the user's Facebook account by removing all stored page tokens.
+        /// </summary>
+        /// <returns>Success confirmation.</returns>
+        [HttpDelete("disconnect")]
+        [Authorize(Policy = Policy.GENERAL_ACCESS)]
+        public async Task<IActionResult> Disconnect()
+        {
+            try
+            {
+                var currentUser = await _userService.GetUserAsync(HttpContext);
+                await _facebookPageService.DisconnectUserPagesAsync(currentUser.Id);
+
+                _logger.LogInformation("Successfully disconnected Facebook account for user {UserId}", currentUser.Id);
+
+                return Ok(new { message = "Facebook account disconnected successfully." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while disconnecting Facebook account");
+                return StatusCode(500, new { message = "An internal error occurred while disconnecting from Facebook." });
+            }
+        }
     }
 }

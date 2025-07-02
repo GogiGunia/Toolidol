@@ -12,6 +12,9 @@
     <Folder Include="src\app\core-components\user\" />
     <Folder Include="src\app\core-services\data-provider\httpInterceptors\" />
     <Folder Include="src\app\core-services\data-provider\services\" />
+    <Folder Include="src\app\external-services\facebook\" />
+    <Folder Include="src\app\external-components\" />
+    <Folder Include="src\app\directives\" />
     <Folder Include="src\app\toolidol-components\" />
     <Folder Include="src\app\guards\" />
   </ItemGroup>

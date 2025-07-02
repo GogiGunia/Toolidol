@@ -42,6 +42,11 @@ export const routes: Routes = [
     loadComponent: () => import('../app/core-components/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [authGuard]
   },
+  {
+    path: 'app-connections',
+    loadComponent: () => import('../app/toolidol-components/app-connections/app-connections.component').then(m => m.AppConnectionsComponent),
+    canActivate: [authGuard]
+  },
 
   // Admin-only routes
   {

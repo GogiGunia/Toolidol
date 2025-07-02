@@ -8,6 +8,8 @@ import { NavigationService } from './core-services/navigation.service';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { UserService } from './core-services/user.service';
+import { environment } from '../environments/environment';
+import { FacebookConnectService } from './external-services/facebook/facebook-connect.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +30,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private navigationService: NavigationService,
-    private userService: UserService  // Added for authentication awareness
+    private userService: UserService,  // Added for authentication awareness
+    private facebookConnectService: FacebookConnectService
+
   ) {
     // Enhanced effect that includes authentication state (preserves your existing logging)
     effect(() => {
@@ -46,6 +50,7 @@ export class AppComponent implements OnInit {
     //console.log("App component - Initial authentication state:", this.isAuthenticated());
     //console.log("App component - Initial user:", this.userDisplayName());
   }
+
 
   // Your existing event handlers (preserved exactly)
   public onNavigationChange(item: NavigationItem) {

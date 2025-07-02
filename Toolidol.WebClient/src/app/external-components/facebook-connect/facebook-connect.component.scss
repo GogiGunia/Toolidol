@@ -1,0 +1,77 @@
+.facebook-connect-card {
+  max-width: 500px;
+  margin: 16px;
+}
+
+.facebook-avatar {
+  background-color: #1877F2;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.success-icon {
+  color: #4CAF50;
+}
+
+.warning-icon {
+  color: #FF9800;
+}
+
+.pages-section {
+  margin-top: 16px;
+}
+
+.pages-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.pages-chips {
+  margin-bottom: 8px;
+}
+
+.description {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+mat-card-actions {
+  padding: 16px;
+}
+
+mat-card-actions button {
+  margin-left: 8px;
+}
+
+mat-card-actions button:first-child {
+  margin-left: 0;
+}
+
+.connected-state, .disconnected-state {
+  min-height: 80px;
+}

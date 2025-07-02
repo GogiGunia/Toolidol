@@ -124,6 +124,14 @@ export class NavigationService {
         showInNavigation: true,
         icon: 'dashboard'
       });
+      items.push({
+        id: 'app-connections',
+        name: 'App Connections',
+        component: 'AppConnectionsComponent',
+        isActive: activeRoute === 'app-connections',
+        showInNavigation: true,
+        icon: 'hub' // Or 'settings_ethernet'
+      });
 
       // Role-based navigation items
       //if (this.userService.hasAnyRole(['BusinessUser', 'Admin'])) {

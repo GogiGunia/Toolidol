@@ -1,0 +1,90 @@
+<mat-card class="facebook-connect-card">
+  <mat-card-header>
+    <div mat-card-avatar class="facebook-avatar">
+      <mat-icon>facebook</mat-icon>
+    </div>
+    <mat-card-title>Facebook Integration</mat-card-title>
+    <mat-card-subtitle>
+      {{ connectionStatus?.isConnected ? 'Connected' : 'Not Connected' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>{{ loadingMessage }}</p>
+    </div>
+
+    <!--
+      FIX: Added a check for `connectionStatus` itself to be non-null.
+      The `*ngIf` now ensures that within this block, `connectionStatus` is guaranteed to be a valid object,
+      which makes accessing `connectionStatus.pages` and `connectionStatus.pageCount` safe.
+      This resolves the "Object is possibly 'null'" template errors.
+    -->
+    <div *ngIf="!isLoading && connectionStatus && connectionStatus.isConnected" class="connected-state">
+      <div class="status-info">
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        <span>Your Facebook account is connected</span>
+      </div>
+
+      <div *ngIf="connectionStatus.pages && connectionStatus.pages.length > 0" class="pages-section">
+        <h4>Connected Pages ({{ connectionStatus.pageCount }})</h4>
+        <div class="pages-chips">
+          <!--
+            FIX: Changed <mat-chip-list> back to <mat-chip-set>.
+            <mat-chip-list> was removed in Angular Material v15.
+            <mat-chip-set> is the correct replacement for a non-interactive list of chips.
+          -->
+          <mat-chip-set>
+            <mat-chip *ngFor="let page of connectionStatus.pages">
+              <mat-icon matChipIcon>pages</mat-icon>
+              {{ page.name }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disconnected state -->
+    <div *ngIf="!isLoading && !connectionStatus?.isConnected" class="disconnected-state">
+      <div class="status-info">
+        <mat-icon class="warning-icon">warning</mat-icon>
+        <span>Connect your Facebook account to manage your pages</span>
+      </div>
+      <p class="description">
+        Connect your Facebook account to automatically post content to your Facebook pages.
+      </p>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <!-- Connect button -->
+    <button *ngIf="!connectionStatus?.isConnected"
+            mat-raised-button
+            color="primary"
+            (click)="connectAccount()"
+            [disabled]="isLoading">
+      <mat-icon>link</mat-icon>
+      Connect Facebook
+    </button>
+
+    <!-- Disconnect button -->
+    <button *ngIf="connectionStatus?.isConnected"
+            mat-stroked-button
+            color="warn"
+            (click)="disconnectAccount()"
+            [disabled]="isLoading">
+      <mat-icon>link_off</mat-icon>
+      Disconnect
+    </button>
+
+    <!-- Refresh button -->
+    <button mat-button
+            (click)="refreshStatus()"
+            [disabled]="isLoading"
+            matTooltip="Refresh connection status">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
